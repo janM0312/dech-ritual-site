@@ -139,6 +139,11 @@ function Index() {
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
               {hero.meta.subheadline}
             </p>
+            {hero.body.length > 0 && (
+              <div className="mt-4 max-w-xl space-y-4 text-muted-foreground">
+                <Prose blocks={hero.body} />
+              </div>
+            )}
             <div className="mt-10 flex flex-wrap gap-3">
               <a
                 href="#rezervace"
