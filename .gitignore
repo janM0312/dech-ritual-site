@@ -20,6 +20,9 @@ dist-ssr
 .wrangler/
 .dev.vars
 
+# Raw photo originals — kept locally only, optimized copies live in src/assets/photos/
+/origofoto/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
