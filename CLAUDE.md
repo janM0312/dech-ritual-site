@@ -22,6 +22,7 @@ bun run lint        # eslint .
 bun run format      # prettier --write .
 ```
 
+
 There is no test suite/runner configured in this repo.
 
 `bunfig.toml` enforces a 24h supply-chain guard (`minimumReleaseAge`) on new dependency versions;
