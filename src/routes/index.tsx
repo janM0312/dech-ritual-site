@@ -1,7 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import heroImg from "@/assets/hero.jpg";
-import lucieImg from "@/assets/lucie.jpg";
+import heroImg from "@/assets/photos/hero.jpg";
+import lucieImg from "@/assets/photos/o-mne.jpg";
+import breathworkImg from "@/assets/photos/breathwork.jpg";
+import sluzbyIndividualniImg from "@/assets/photos/sluzby-individualni.jpg";
+import sluzbySkupinaImg from "@/assets/photos/sluzby-skupina.jpg";
+import sluzbyRetreatyImg from "@/assets/photos/sluzby-retreaty.jpg";
+import sluzbyFiremniImg from "@/assets/photos/sluzby-firemni.jpg";
 import {
   dotazy,
   hero,
@@ -31,12 +36,20 @@ const benefits = prinosy.items.map((i) => ({
   body: i.body,
 }));
 
+const serviceImages: Record<string, string> = {
+  individual: sluzbyIndividualniImg,
+  kruhy: sluzbySkupinaImg,
+  workshopy: sluzbyRetreatyImg,
+  firmy: sluzbyFiremniImg,
+};
+
 const services = sluzby.items.map((i, idx) => ({
   id: i.meta.id ?? String(idx),
   title: i.title,
   tag: i.meta.tag ?? "",
   body: i.body,
   price: i.meta.price ?? "",
+  image: serviceImages[i.meta.id ?? ""],
 }));
 
 const testimonials = reference.items.map((i) => ({
@@ -200,15 +213,25 @@ function Index() {
       {/* What is Breathwork */}
       <section id="breathwork" className="border-t border-border/60">
         <div className="mx-auto max-w-6xl px-6 py-24 lg:px-10">
-          <div className="mx-auto max-w-2xl text-center">
-            <span className="text-xs uppercase tracking-[0.25em] text-brown">
-              {prinosy.meta.eyebrow}
-            </span>
-            <h2 className="mt-4 font-serif text-4xl leading-tight text-brown-deep sm:text-5xl">
-              {prinosy.meta.title}
-            </h2>
-            <div className="mt-5 space-y-3 text-muted-foreground">
-              <Prose blocks={prinosy.body} />
+          <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+            <img
+              src={breathworkImg}
+              width={1200}
+              height={1500}
+              loading="lazy"
+              alt={prinosy.meta.title}
+              className="aspect-[4/5] w-full rounded-[1.75rem] object-cover shadow-md"
+            />
+            <div>
+              <span className="text-xs uppercase tracking-[0.25em] text-brown">
+                {prinosy.meta.eyebrow}
+              </span>
+              <h2 className="mt-4 font-serif text-4xl leading-tight text-brown-deep sm:text-5xl">
+                {prinosy.meta.title}
+              </h2>
+              <div className="mt-5 space-y-3 text-muted-foreground">
+                <Prose blocks={prinosy.body} />
+              </div>
             </div>
           </div>
           <div className="mt-16 grid gap-6 md:grid-cols-3">
@@ -270,22 +293,31 @@ function Index() {
                 );
               })}
             </div>
-            <div className="rounded-3xl bg-card p-10 shadow-sm">
-              <p className="text-xs uppercase tracking-[0.25em] text-brown">{active.tag}</p>
-              <h3 className="mt-3 font-serif text-3xl text-brown-deep sm:text-4xl">
-                {active.title}
-              </h3>
-              <div className="mt-5 space-y-3 leading-relaxed text-muted-foreground">
-                <Prose blocks={active.body} />
-              </div>
-              <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-border pt-6">
-                <p className="font-serif text-2xl text-brown-deep">{active.price}</p>
-                <a
-                  href="#rezervace"
-                  className="rounded-full bg-brown px-6 py-3 text-sm font-medium text-primary-foreground transition-colors hover:bg-brown-deep"
-                >
-                  {sluzby.meta.cta}
-                </a>
+            <div className="overflow-hidden rounded-3xl bg-card shadow-sm">
+              {active.image && (
+                <img
+                  src={active.image}
+                  alt={active.title}
+                  className="aspect-[16/9] w-full object-cover"
+                />
+              )}
+              <div className="p-10">
+                <p className="text-xs uppercase tracking-[0.25em] text-brown">{active.tag}</p>
+                <h3 className="mt-3 font-serif text-3xl text-brown-deep sm:text-4xl">
+                  {active.title}
+                </h3>
+                <div className="mt-5 space-y-3 leading-relaxed text-muted-foreground">
+                  <Prose blocks={active.body} />
+                </div>
+                <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-border pt-6">
+                  <p className="font-serif text-2xl text-brown-deep">{active.price}</p>
+                  <a
+                    href="#rezervace"
+                    className="rounded-full bg-brown px-6 py-3 text-sm font-medium text-primary-foreground transition-colors hover:bg-brown-deep"
+                  >
+                    {sluzby.meta.cta}
+                  </a>
+                </div>
               </div>
             </div>
           </div>
