@@ -2,32 +2,48 @@
 // The .md files are the single source of truth — the build inlines them via ?raw
 // imports, so every build produces exactly the same output for the same content.
 
+export type Block = { type: "p"; text: string } | { type: "ul"; items: string[] };
+
 export type MdItem = {
   title: string;
   meta: Record<string, string>;
-  body: string[];
+  body: Block[];
 };
 
 export type MdDoc = {
   title: string;
   meta: Record<string, string>;
-  body: string[];
+  body: Block[];
   items: MdItem[];
 };
 
 const META_LINE = /^([a-z][a-z0-9_-]*):\s*(.*)$/;
+const LIST_ITEM = /^-\s+(.*)$/;
 
 export function parseDoc(raw: string): MdDoc {
   const doc: MdDoc = { title: "", meta: {}, body: [], items: [] };
   let current: MdItem | null = null;
   let paragraph: string[] = [];
+  let list: string[] = [];
 
-  const flush = () => {
+  const target = () => (current ? current.body : doc.body);
+
+  const flushParagraph = () => {
     if (paragraph.length === 0) return;
     const text = paragraph.join(" ").trim();
     paragraph = [];
-    if (!text) return;
-    (current ? current.body : doc.body).push(text);
+    if (text) target().push({ type: "p", text });
+  };
+
+  const flushList = () => {
+    if (list.length === 0) return;
+    target().push({ type: "ul", items: list });
+    list = [];
+  };
+
+  const flush = () => {
+    flushParagraph();
+    flushList();
   };
 
   for (const rawLine of raw.replace(/\r\n/g, "\n").split("\n")) {
@@ -51,6 +67,14 @@ export function parseDoc(raw: string): MdDoc {
       doc.title = line.slice(2).trim();
       continue;
     }
+
+    const listItem = LIST_ITEM.exec(line);
+    if (listItem) {
+      flushParagraph();
+      list.push(listItem[1].trim());
+      continue;
+    }
+    if (list.length > 0) flushList();
 
     const meta = paragraph.length === 0 ? META_LINE.exec(line) : null;
     if (meta) {

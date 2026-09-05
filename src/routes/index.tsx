@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import heroImg from "@/assets/hero.jpg";
 import lucieImg from "@/assets/lucie.jpg";
 import { dotazy, oMne, prinosy, reference, sluzby } from "@/content";
-
+import type { Block } from "@/content/parse";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -21,28 +21,45 @@ const nav = [
 const benefits = prinosy.items.map((i) => ({
   n: i.meta.n ?? "",
   title: i.title,
-  body: i.body.join(" "),
+  body: i.body,
 }));
 
 const services = sluzby.items.map((i, idx) => ({
   id: i.meta.id ?? String(idx),
   title: i.title,
   tag: i.meta.tag ?? "",
-  body: i.body.join(" "),
+  body: i.body,
   price: i.meta.price ?? "",
 }));
 
 const testimonials = reference.items.map((i) => ({
-  quote: i.body.join(" "),
+  quote: i.body,
   name: i.title,
   role: i.meta.role ?? "",
 }));
 
 const faqs = dotazy.items.map((i) => ({
   q: i.title,
-  a: i.body.join(" "),
+  a: i.body,
 }));
 
+function Prose({ blocks }: { blocks: Block[] }) {
+  return (
+    <>
+      {blocks.map((block, i) =>
+        block.type === "ul" ? (
+          <ul key={i} className="list-disc space-y-1 pl-5">
+            {block.items.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        ) : (
+          <p key={i}>{block.text}</p>
+        ),
+      )}
+    </>
+  );
+}
 
 function Index() {
   const [activeService, setActiveService] = useState(services[0].id);
@@ -64,7 +81,6 @@ function Index() {
     script.crossOrigin = "anonymous";
     document.body.appendChild(script);
   }, []);
-
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -106,8 +122,8 @@ function Index() {
               Objevte sílu <em className="italic text-brown">vědomého</em> dechu
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
-              Individuální breathwork sezení, skupinové dechové kruhy a workshopy
-              v bezpečné atmosféře.
+              Individuální breathwork sezení, skupinové dechové kruhy a workshopy v bezpečné
+              atmosféře.
             </p>
             <div className="mt-10 flex flex-wrap gap-3">
               <a
@@ -164,9 +180,7 @@ function Index() {
               {oMne.meta.title}
             </h2>
             <div className="mt-6 space-y-5 text-[15px] leading-relaxed text-muted-foreground">
-              {oMne.body.map((p) => (
-                <p key={p}>{p}</p>
-              ))}
+              <Prose blocks={oMne.body} />
             </div>
             <div className="mt-8 flex gap-8 border-t border-border pt-6">
               {oMne.items.map((s) => (
@@ -178,7 +192,6 @@ function Index() {
                 </div>
               ))}
             </div>
-
           </div>
         </div>
       </section>
@@ -193,8 +206,9 @@ function Index() {
             <h2 className="mt-4 font-serif text-4xl leading-tight text-brown-deep sm:text-5xl">
               {prinosy.meta.title}
             </h2>
-            <p className="mt-5 text-muted-foreground">{prinosy.body.join(" ")}</p>
-
+            <div className="mt-5 space-y-3 text-muted-foreground">
+              <Prose blocks={prinosy.body} />
+            </div>
           </div>
           <div className="mt-16 grid gap-6 md:grid-cols-3">
             {benefits.map((b) => (
@@ -203,12 +217,10 @@ function Index() {
                 className="group rounded-3xl border border-border bg-card p-8 transition-all hover:-translate-y-1 hover:border-brown/40 hover:shadow-lg"
               >
                 <div className="mb-6 font-serif text-sm text-brown">{b.n}</div>
-                <h3 className="font-serif text-2xl leading-snug text-brown-deep">
-                  {b.title}
-                </h3>
-                <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-                  {b.body}
-                </p>
+                <h3 className="font-serif text-2xl leading-snug text-brown-deep">{b.title}</h3>
+                <div className="mt-4 space-y-2 text-sm leading-relaxed text-muted-foreground">
+                  <Prose blocks={b.body} />
+                </div>
               </article>
             ))}
           </div>
@@ -228,7 +240,6 @@ function Index() {
               </h2>
             </div>
             <p className="max-w-md text-muted-foreground">{sluzby.meta.intro}</p>
-
           </div>
 
           <div className="mt-12 grid gap-8 lg:grid-cols-[1fr_1.4fr]">
@@ -246,12 +257,8 @@ function Index() {
                     }`}
                   >
                     <div>
-                      <p className="text-xs uppercase tracking-widest text-brown">
-                        {s.tag}
-                      </p>
-                      <p className="mt-1 font-serif text-xl text-brown-deep">
-                        {s.title}
-                      </p>
+                      <p className="text-xs uppercase tracking-widest text-brown">{s.tag}</p>
+                      <p className="mt-1 font-serif text-xl text-brown-deep">{s.title}</p>
                     </div>
                     <span
                       className={`text-xl transition-transform ${isActive ? "translate-x-1 text-brown" : "text-muted-foreground"}`}
@@ -263,15 +270,13 @@ function Index() {
               })}
             </div>
             <div className="rounded-3xl bg-card p-10 shadow-sm">
-              <p className="text-xs uppercase tracking-[0.25em] text-brown">
-                {active.tag}
-              </p>
+              <p className="text-xs uppercase tracking-[0.25em] text-brown">{active.tag}</p>
               <h3 className="mt-3 font-serif text-3xl text-brown-deep sm:text-4xl">
                 {active.title}
               </h3>
-              <p className="mt-5 leading-relaxed text-muted-foreground">
-                {active.body}
-              </p>
+              <div className="mt-5 space-y-3 leading-relaxed text-muted-foreground">
+                <Prose blocks={active.body} />
+              </div>
               <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-border pt-6">
                 <p className="font-serif text-2xl text-brown-deep">{active.price}</p>
                 <a
@@ -308,7 +313,6 @@ function Index() {
           <p className="mt-6 text-center text-xs text-muted-foreground">
             Rezervace probíhá zabezpečeně přes Zenamu · potvrzení obdržíte e-mailem
           </p>
-
         </div>
       </section>
 
@@ -324,8 +328,8 @@ function Index() {
                 Chcete pracovat s dechem i doma?
               </h2>
               <p className="mt-5 max-w-xl text-cream/70">
-                Vstupte do naší online členské sekce na HeroHero. Audio nahrávky
-                dechových praxí, vedené meditace a průvodce pro každodenní rituál.
+                Vstupte do naší online členské sekce na HeroHero. Audio nahrávky dechových praxí,
+                vedené meditace a průvodce pro každodenní rituál.
               </p>
             </div>
             <div className="flex md:justify-end">
@@ -350,7 +354,6 @@ function Index() {
             <h2 className="mt-4 font-serif text-4xl leading-tight text-brown-deep sm:text-5xl">
               {reference.meta.title}
             </h2>
-
           </div>
           <div className="mt-16 grid gap-6 md:grid-cols-3">
             {testimonials.map((t) => (
@@ -358,9 +361,9 @@ function Index() {
                 key={t.name}
                 className="flex flex-col justify-between rounded-3xl border border-border bg-card p-8 shadow-sm"
               >
-                <div className="font-serif text-4xl leading-none text-brown">“</div>
-                <blockquote className="mt-2 text-[15px] leading-relaxed text-foreground/80">
-                  {t.quote}
+                <div className="font-serif text-4xl leading-none text-brown">"</div>
+                <blockquote className="mt-2 space-y-3 text-[15px] leading-relaxed text-foreground/80">
+                  <Prose blocks={t.quote} />
                 </blockquote>
                 <figcaption className="mt-8 border-t border-border pt-4">
                   <p className="font-serif text-lg text-brown-deep">{t.name}</p>
@@ -385,23 +388,17 @@ function Index() {
               {dotazy.meta.title}
             </h2>
             <p className="mt-5 text-muted-foreground">{dotazy.meta.intro}</p>
-
           </div>
           <div className="flex flex-col gap-3">
             {faqs.map((f, i) => {
               const open = openFaq === i;
               return (
-                <div
-                  key={f.q}
-                  className="overflow-hidden rounded-2xl border border-border bg-card"
-                >
+                <div key={f.q} className="overflow-hidden rounded-2xl border border-border bg-card">
                   <button
                     onClick={() => setOpenFaq(open ? null : i)}
                     className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
                   >
-                    <span className="font-serif text-lg text-brown-deep">
-                      {f.q}
-                    </span>
+                    <span className="font-serif text-lg text-brown-deep">{f.q}</span>
                     <span
                       className={`text-2xl text-brown transition-transform ${open ? "rotate-45" : ""}`}
                     >
@@ -409,8 +406,8 @@ function Index() {
                     </span>
                   </button>
                   {open && (
-                    <div className="px-6 pb-6 text-sm leading-relaxed text-muted-foreground">
-                      {f.a}
+                    <div className="space-y-2 px-6 pb-6 text-sm leading-relaxed text-muted-foreground">
+                      <Prose blocks={f.a} />
                     </div>
                   )}
                 </div>
@@ -455,10 +452,7 @@ function Index() {
               <p className="text-xs uppercase tracking-[0.25em] text-brown">Sledujte</p>
               <ul className="mt-4 space-y-2 text-sm text-foreground/80">
                 <li>
-                  <a
-                    href="https://instagram.com/dech.ritual"
-                    className="hover:text-brown-deep"
-                  >
+                  <a href="https://instagram.com/dech.ritual" className="hover:text-brown-deep">
                     Instagram — @dech.ritual
                   </a>
                 </li>
