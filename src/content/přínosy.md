@@ -11,20 +11,70 @@ Každé setkání je jedinečné. Někdo odchází s pocitem hlubokého uvolněn
 
 Breathwork není o výkonu. Je o návratu k sobě. O odvaze cítit, zpomalit a dovolit si znovu svobodně dýchat.
 
-## Mentální čistota a úleva od stresu
+Co vám může Breathwork přinést?
+
+Každý člověk přichází s jiným příběhem, a proto je každá zkušenost s Breathwork jedinečná. Přesto mnoho lidí popisuje, že jim pravidelná práce s dechem přináší:
+
+## Hluboké uvolnění těla i mysli
 
 n: 01
 
-Uvolněte napětí, zpomalte myšlenkové proudy a najděte prostor pro klid a jasnost mysli.
+...
 
-## Hluboká regenerace organismu
+## Snížení stresu a napětí
 
 n: 02
 
-Okysličení buněk, podpora nervového systému a přirozená obnova energie skrze vědomý dech.
+...
 
-## Emoční uvolnění a vnitřní klid
+## Lepší zvládání náročných životních situací
 
 n: 03
 
-Bezpečné rozpuštění zadržovaných emocí a návrat k pocitu celistvosti a přítomnosti.
+B...
+
+## Větší propojení se svým tělem a intuicí
+
+n: 04
+
+...
+
+## Uvolnění potlačených emocí v bezpečném prostředí
+
+n: 05
+
+...
+
+## Pocit lehkosti, klidu a vnitřní rovnováhy
+
+n: 06
+
+...
+
+## Více energie a vitality
+
+n: 07
+
+...
+
+## Kvalitnější spánek a lepší regeneraci
+
+n: 08
+
+...
+
+## Hlubší sebepoznání a osobní růst
+
+n: 09
+
+...
+
+## Větší důvěru v sebe i ve svůj život
+
+n: 10
+
+...
+
+
+Breathwork není o tom něco „opravit“. Je to prostor, ve kterém si dovolíte zastavit se, nadechnout a naslouchat tomu, co vám vaše tělo a mysl chtějí říct.
+Možná nepřijdete najít všechny odpovědi. Ale velmi často odcházíte s pocitem, že jste znovu našli sami sebe.

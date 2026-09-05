@@ -43,10 +43,10 @@ Pokud tě sem přivedla zvědavost, únava, bolest nebo tichá touha po změně,
 
 A bude mi ctí být součástí té tvé.
 
-## 5+
+## ?+
 
 label: let praxe
 
 ## certifikace
 
-label: conscious connected breathing
+label: DOPLNIT

@@ -4,9 +4,9 @@ tagline: Vědomé dýchání jako každodenní rituál klidu, síly a přítomno
 payment_note: Platby probíhají v hotovosti nebo QR kódem na místě.
 contact_heading: Kontakt
 name: Lucie Vaňková
-email: ahoj@dechritual.cz
-phone_display: +420 777 123 456
-phone_href: +420777123456
+email: dechritual@gmail.com
+phone_display: +420 737 450 543
+phone_href: +420737450543
 social_heading: Sledujte
 instagram_label: Instagram — @dech.ritual
 instagram_href: https://instagram.com/dech.ritual

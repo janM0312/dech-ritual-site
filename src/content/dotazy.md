@@ -15,3 +15,7 @@ Ne vždy. Některé zdravotní nebo psychické stavy mohou být důvodem, proč 
 ## Co si ze setkání odnesu?
 
 Možná hlubší uvolnění, nový pohled, větší kontakt se svým tělem nebo jednoduše chvíli, kdy ses opravdu zastavil/a. Každý si ze své zkušenosti odnese něco jiného.
+
+## Co si mám vzít s sebou?
+
+Pohodlné oblečení (nedoporučuji černé) , láhev s vodou, karimatku a deku. Především otevřenost dopřát si chvíli jen pro sebe
