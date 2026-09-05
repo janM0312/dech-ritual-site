@@ -75,6 +75,8 @@ n: 10
 
 ...
 
+---
 
 Breathwork není o tom něco „opravit“. Je to prostor, ve kterém si dovolíte zastavit se, nadechnout a naslouchat tomu, co vám vaše tělo a mysl chtějí říct.
+
 Možná nepřijdete najít všechny odpovědi. Ale velmi často odcházíte s pocitem, že jste znovu našli sami sebe.

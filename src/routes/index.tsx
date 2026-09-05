@@ -248,6 +248,11 @@ function Index() {
               </article>
             ))}
           </div>
+          {prinosy.outro.length > 0 && (
+            <div className="mx-auto mt-16 max-w-2xl space-y-3 text-center text-muted-foreground">
+              <Prose blocks={prinosy.outro} />
+            </div>
+          )}
         </div>
       </section>
 

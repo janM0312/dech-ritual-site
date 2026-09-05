@@ -15,18 +15,20 @@ export type MdDoc = {
   meta: Record<string, string>;
   body: Block[];
   items: MdItem[];
+  outro: Block[];
 };
 
 const META_LINE = /^([a-z][a-z0-9_-]*):\s*(.*)$/;
 const LIST_ITEM = /^-\s+(.*)$/;
 
 export function parseDoc(raw: string): MdDoc {
-  const doc: MdDoc = { title: "", meta: {}, body: [], items: [] };
+  const doc: MdDoc = { title: "", meta: {}, body: [], items: [], outro: [] };
   let current: MdItem | null = null;
+  let inOutro = false;
   let paragraph: string[] = [];
   let list: string[] = [];
 
-  const target = () => (current ? current.body : doc.body);
+  const target = () => (current ? current.body : inOutro ? doc.outro : doc.body);
 
   const flushParagraph = () => {
     if (paragraph.length === 0) return;
@@ -54,6 +56,13 @@ export function parseDoc(raw: string): MdDoc {
       continue;
     }
 
+    if (line === "---") {
+      flush();
+      current = null;
+      inOutro = true;
+      continue;
+    }
+
     if (line.startsWith("## ")) {
       flush();
       current = { title: line.slice(3).trim(), meta: {}, body: [] };
@@ -76,8 +85,13 @@ export function parseDoc(raw: string): MdDoc {
     }
     if (list.length > 0) flushList();
 
-    const meta = paragraph.length === 0 ? META_LINE.exec(line) : null;
+    // Meta lines ("key: value") are recognized wherever they appear, not just
+    // at the start of a block — content authors don't reliably leave a blank
+    // line before trailing fields like `cta_primary:`, so a mid-paragraph
+    // match still flushes the paragraph gathered so far and registers as meta.
+    const meta = META_LINE.exec(line);
     if (meta) {
+      flushParagraph();
       (current ? current.meta : doc.meta)[meta[1]] = meta[2].trim();
       continue;
     }
