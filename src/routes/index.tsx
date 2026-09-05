@@ -1,22 +1,34 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useRef, useState } from "react";
-import heroImg from "@/assets/hero.jpg";
-import lucieImg from "@/assets/lucie.jpg";
-import { dotazy, oMne, prinosy, reference, sluzby } from "@/content";
+import { useEffect, useState } from "react";
+import heroImg from "@/assets/photos/hero.jpg";
+import lucieImg from "@/assets/photos/o-mne.jpg";
+import breathworkImg from "@/assets/photos/breathwork.jpg";
+import sluzbyIndividualniImg from "@/assets/photos/sluzby-individualni.jpg";
+import sluzbySkupinaImg from "@/assets/photos/sluzby-skupina.jpg";
+import sluzbyRetreatyImg from "@/assets/photos/sluzby-retreaty.jpg";
+import sluzbyFiremniImg from "@/assets/photos/sluzby-firemni.jpg";
+import {
+  dotazy,
+  hero,
+  hlavicka,
+  komunita,
+  kontakt,
+  oMne,
+  prinosy,
+  reference,
+  rezervace,
+  sluzby,
+} from "@/content";
 import type { Block } from "@/content/parse";
 
 export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const nav = [
-  { href: "#o-mne", label: "O mně" },
-  { href: "#breathwork", label: "Co je Breathwork" },
-  { href: "#sluzby", label: "Služby" },
-  { href: "#rezervace", label: "Kalendář & Rezervace" },
-  { href: "#faq", label: "FAQ" },
-  { href: "#kontakt", label: "Kontakt" },
-];
+const nav = hlavicka.items.map((i) => ({
+  href: i.meta.href ?? "",
+  label: i.title,
+}));
 
 const benefits = prinosy.items.map((i) => ({
   n: i.meta.n ?? "",
@@ -24,12 +36,20 @@ const benefits = prinosy.items.map((i) => ({
   body: i.body,
 }));
 
+const serviceImages: Record<string, string> = {
+  individual: sluzbyIndividualniImg,
+  kruhy: sluzbySkupinaImg,
+  workshopy: sluzbyRetreatyImg,
+  firmy: sluzbyFiremniImg,
+};
+
 const services = sluzby.items.map((i, idx) => ({
   id: i.meta.id ?? String(idx),
   title: i.title,
   tag: i.meta.tag ?? "",
   body: i.body,
   price: i.meta.price ?? "",
+  image: serviceImages[i.meta.id ?? ""],
 }));
 
 const testimonials = reference.items.map((i) => ({
@@ -65,19 +85,12 @@ function Index() {
   const [activeService, setActiveService] = useState(services[0].id);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const active = services.find((s) => s.id === activeService)!;
-  const zenamuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const el = zenamuRef.current;
-    if (!el) return;
-    el.setAttribute("calendar-id", "96c7a0ca48777e9a7b02404c0386a246");
-    el.setAttribute("data-config", '{"showTitle": true}');
-
-    const src = "https://zenamu.com/calendar/workshops.js";
+    const src = "https://zenamu.com/calendar/list.js";
     if (document.querySelector(`script[src="${src}"]`)) return;
     const script = document.createElement("script");
     script.src = src;
-    script.async = true;
     script.crossOrigin = "anonymous";
     document.body.appendChild(script);
   }, []);
@@ -105,7 +118,7 @@ function Index() {
             href="#rezervace"
             className="rounded-full bg-brown px-5 py-2.5 text-sm font-medium text-primary-foreground transition-all hover:bg-brown-deep hover:shadow-lg"
           >
-            Rezervovat sezení
+            {hlavicka.meta.cta}
           </a>
         </div>
       </header>
@@ -116,27 +129,28 @@ function Index() {
           <div className="flex flex-col justify-center">
             <span className="mb-6 inline-flex w-fit items-center gap-2 rounded-full border border-brown/30 bg-cream px-4 py-1.5 text-xs uppercase tracking-[0.2em] text-brown-deep">
               <span className="h-1.5 w-1.5 rounded-full bg-brown" />
-              Vědomé dýchání · Praha
+              {hero.meta.eyebrow}
             </span>
             <h1 className="font-serif text-5xl leading-[1.05] text-brown-deep sm:text-6xl lg:text-7xl">
-              Objevte sílu <em className="italic text-brown">vědomého</em> dechu
+              {hero.meta.headline_start}{" "}
+              <em className="italic text-brown">{hero.meta.headline_em}</em>{" "}
+              {hero.meta.headline_end}
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
-              Individuální breathwork sezení, skupinové dechové kruhy a workshopy v bezpečné
-              atmosféře.
+              {hero.meta.subheadline}
             </p>
             <div className="mt-10 flex flex-wrap gap-3">
               <a
                 href="#rezervace"
                 className="rounded-full bg-brown px-7 py-3.5 text-sm font-medium text-primary-foreground shadow-sm transition-all hover:bg-brown-deep hover:shadow-lg"
               >
-                Prohlédnout termíny
+                {hero.meta.cta_primary}
               </a>
               <a
                 href="#breathwork"
                 className="rounded-full border border-brown/40 px-7 py-3.5 text-sm font-medium text-brown-deep transition-colors hover:bg-rose/60"
               >
-                Co je Breathwork?
+                {hero.meta.cta_secondary}
               </a>
             </div>
           </div>
@@ -150,9 +164,9 @@ function Index() {
               className="aspect-[4/5] w-full rounded-[2rem] object-cover shadow-xl"
             />
             <div className="absolute -bottom-6 -left-6 hidden rounded-2xl bg-card px-5 py-4 shadow-lg sm:block">
-              <p className="font-serif text-2xl text-brown-deep">200+</p>
+              <p className="font-serif text-2xl text-brown-deep">{hero.meta.stat_number}</p>
               <p className="text-xs uppercase tracking-widest text-muted-foreground">
-                Sezení a kruhů
+                {hero.meta.stat_label}
               </p>
             </div>
           </div>
@@ -199,15 +213,25 @@ function Index() {
       {/* What is Breathwork */}
       <section id="breathwork" className="border-t border-border/60">
         <div className="mx-auto max-w-6xl px-6 py-24 lg:px-10">
-          <div className="mx-auto max-w-2xl text-center">
-            <span className="text-xs uppercase tracking-[0.25em] text-brown">
-              {prinosy.meta.eyebrow}
-            </span>
-            <h2 className="mt-4 font-serif text-4xl leading-tight text-brown-deep sm:text-5xl">
-              {prinosy.meta.title}
-            </h2>
-            <div className="mt-5 space-y-3 text-muted-foreground">
-              <Prose blocks={prinosy.body} />
+          <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+            <img
+              src={breathworkImg}
+              width={1200}
+              height={1500}
+              loading="lazy"
+              alt={prinosy.meta.title}
+              className="aspect-[4/5] w-full rounded-[1.75rem] object-cover shadow-md"
+            />
+            <div>
+              <span className="text-xs uppercase tracking-[0.25em] text-brown">
+                {prinosy.meta.eyebrow}
+              </span>
+              <h2 className="mt-4 font-serif text-4xl leading-tight text-brown-deep sm:text-5xl">
+                {prinosy.meta.title}
+              </h2>
+              <div className="mt-5 space-y-3 text-muted-foreground">
+                <Prose blocks={prinosy.body} />
+              </div>
             </div>
           </div>
           <div className="mt-16 grid gap-6 md:grid-cols-3">
@@ -269,22 +293,31 @@ function Index() {
                 );
               })}
             </div>
-            <div className="rounded-3xl bg-card p-10 shadow-sm">
-              <p className="text-xs uppercase tracking-[0.25em] text-brown">{active.tag}</p>
-              <h3 className="mt-3 font-serif text-3xl text-brown-deep sm:text-4xl">
-                {active.title}
-              </h3>
-              <div className="mt-5 space-y-3 leading-relaxed text-muted-foreground">
-                <Prose blocks={active.body} />
-              </div>
-              <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-border pt-6">
-                <p className="font-serif text-2xl text-brown-deep">{active.price}</p>
-                <a
-                  href="#rezervace"
-                  className="rounded-full bg-brown px-6 py-3 text-sm font-medium text-primary-foreground transition-colors hover:bg-brown-deep"
-                >
-                  {sluzby.meta.cta}
-                </a>
+            <div className="overflow-hidden rounded-3xl bg-card shadow-sm">
+              {active.image && (
+                <img
+                  src={active.image}
+                  alt={active.title}
+                  className="aspect-[16/9] w-full object-cover"
+                />
+              )}
+              <div className="p-10">
+                <p className="text-xs uppercase tracking-[0.25em] text-brown">{active.tag}</p>
+                <h3 className="mt-3 font-serif text-3xl text-brown-deep sm:text-4xl">
+                  {active.title}
+                </h3>
+                <div className="mt-5 space-y-3 leading-relaxed text-muted-foreground">
+                  <Prose blocks={active.body} />
+                </div>
+                <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-border pt-6">
+                  <p className="font-serif text-2xl text-brown-deep">{active.price}</p>
+                  <a
+                    href="#rezervace"
+                    className="rounded-full bg-brown px-6 py-3 text-sm font-medium text-primary-foreground transition-colors hover:bg-brown-deep"
+                  >
+                    {sluzby.meta.cta}
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -296,23 +329,19 @@ function Index() {
         <div className="mx-auto max-w-6xl px-6 py-24 lg:px-10">
           <div className="mx-auto max-w-2xl text-center">
             <span className="text-xs uppercase tracking-[0.25em] text-brown">
-              Kalendář & Rezervace
+              {rezervace.meta.eyebrow}
             </span>
             <h2 className="mt-4 font-serif text-4xl leading-tight text-brown-deep sm:text-5xl">
-              Rezervujte si své sezení
+              {rezervace.meta.title}
             </h2>
-            <p className="mt-5 text-muted-foreground">
-              Vyberte si vyhovující termín v rezervačním kalendáři níže.
-            </p>
+            <p className="mt-5 text-muted-foreground">{rezervace.meta.subtitle}</p>
           </div>
 
           <div className="mt-14 overflow-hidden rounded-3xl border border-border bg-card p-4 shadow-sm sm:p-8">
-            <div ref={zenamuRef} id="zenamu-workshops" />
+            <div id="zenamu-calendar" calendar-id="865e2d474c26361276fcee490a5b6298" />
           </div>
 
-          <p className="mt-6 text-center text-xs text-muted-foreground">
-            Rezervace probíhá zabezpečeně přes Zenamu · potvrzení obdržíte e-mailem
-          </p>
+          <p className="mt-6 text-center text-xs text-muted-foreground">{rezervace.meta.note}</p>
         </div>
       </section>
 
@@ -322,22 +351,21 @@ function Index() {
           <div className="grid items-center gap-8 md:grid-cols-[1.4fr_1fr]">
             <div>
               <span className="text-xs uppercase tracking-[0.25em] text-cream/60">
-                Členská sekce
+                {komunita.meta.eyebrow}
               </span>
               <h2 className="mt-4 font-serif text-4xl leading-tight sm:text-5xl">
-                Chcete pracovat s dechem i doma?
+                {komunita.meta.title}
               </h2>
-              <p className="mt-5 max-w-xl text-cream/70">
-                Vstupte do naší online členské sekce na HeroHero. Audio nahrávky dechových praxí,
-                vedené meditace a průvodce pro každodenní rituál.
-              </p>
+              <p className="mt-5 max-w-xl text-cream/70">{komunita.meta.text}</p>
             </div>
             <div className="flex md:justify-end">
               <a
-                href="#"
+                href={kontakt.meta.herohero_href}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="rounded-full bg-cream px-7 py-3.5 text-sm font-medium text-brown-deep transition-all hover:bg-rose"
               >
-                Vstoupit do členské sekce (HeroHero) →
+                {komunita.meta.cta}
               </a>
             </div>
           </div>
@@ -426,47 +454,58 @@ function Index() {
                 dech<span className="text-brown">.</span>ritual
               </a>
               <p className="mt-5 max-w-sm text-sm leading-relaxed text-muted-foreground">
-                Vědomé dýchání jako každodenní rituál klidu, síly a přítomnosti.
+                {kontakt.meta.tagline}
               </p>
               <p className="mt-6 rounded-2xl border border-border bg-card p-4 text-xs text-muted-foreground">
-                Platby probíhají v hotovosti nebo QR kódem na místě.
+                {kontakt.meta.payment_note}
               </p>
             </div>
             <div>
-              <p className="text-xs uppercase tracking-[0.25em] text-brown">Kontakt</p>
+              <p className="text-xs uppercase tracking-[0.25em] text-brown">
+                {kontakt.meta.contact_heading}
+              </p>
               <ul className="mt-4 space-y-2 text-sm text-foreground/80">
-                <li>Lucie Vaňková</li>
+                <li>{kontakt.meta.name}</li>
                 <li>
-                  <a href="mailto:ahoj@dechritual.cz" className="hover:text-brown-deep">
-                    ahoj@dechritual.cz
+                  <a href={`mailto:${kontakt.meta.email}`} className="hover:text-brown-deep">
+                    {kontakt.meta.email}
                   </a>
                 </li>
                 <li>
-                  <a href="tel:+420777123456" className="hover:text-brown-deep">
-                    +420 777 123 456
+                  <a href={`tel:${kontakt.meta.phone_href}`} className="hover:text-brown-deep">
+                    {kontakt.meta.phone_display}
                   </a>
                 </li>
               </ul>
             </div>
             <div>
-              <p className="text-xs uppercase tracking-[0.25em] text-brown">Sledujte</p>
+              <p className="text-xs uppercase tracking-[0.25em] text-brown">
+                {kontakt.meta.social_heading}
+              </p>
               <ul className="mt-4 space-y-2 text-sm text-foreground/80">
                 <li>
-                  <a href="https://instagram.com/dech.ritual" className="hover:text-brown-deep">
-                    Instagram — @dech.ritual
+                  <a href={kontakt.meta.instagram_href} className="hover:text-brown-deep">
+                    {kontakt.meta.instagram_label}
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-brown-deep">
-                    HeroHero — členská sekce
+                  <a
+                    href={kontakt.meta.herohero_href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-brown-deep"
+                  >
+                    {kontakt.meta.herohero_label}
                   </a>
                 </li>
               </ul>
             </div>
           </div>
           <div className="mt-16 flex flex-col items-center justify-between gap-3 border-t border-border pt-6 text-xs text-muted-foreground sm:flex-row">
-            <p>© {new Date().getFullYear()} dech.ritual · Lucie Vaňková</p>
-            <p>Vytvořeno s klidem a záměrem.</p>
+            <p>
+              © {new Date().getFullYear()} dech.ritual · {kontakt.meta.name}
+            </p>
+            <p>{kontakt.meta.footer_note}</p>
           </div>
         </div>
       </footer>
