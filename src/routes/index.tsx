@@ -229,13 +229,13 @@ function Index() {
               />
             </div>
             <div className="flex flex-col justify-center">
-              <span className="mb-4 text-xs uppercase tracking-[0.25em] text-brown">
+              <span className="text-xs uppercase tracking-[0.25em] text-brown">
                 {oMne.meta.eyebrow}
               </span>
-              <h2 className="font-serif text-4xl leading-tight text-brown-deep sm:text-5xl">
+              <h2 className="mt-4 font-serif text-4xl leading-tight text-brown-deep sm:text-5xl">
                 {oMne.meta.title}
               </h2>
-              <div className="mt-6 space-y-5 text-[15px] leading-relaxed text-muted-foreground">
+              <div className="mt-5 space-y-5 text-[15px] leading-relaxed text-muted-foreground">
                 <Prose blocks={oMne.body} />
               </div>
               <div className="mt-8 flex gap-8 border-t border-border pt-6">
@@ -299,16 +299,14 @@ function Index() {
         {/* Services */}
         <section id="sluzby" className="border-t border-border/60 bg-rose/30">
           <div className="mx-auto max-w-6xl px-6 py-24 lg:px-10">
-            <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
-              <div>
-                <span className="text-xs uppercase tracking-[0.25em] text-brown">
-                  {sluzby.meta.eyebrow}
-                </span>
-                <h2 className="mt-4 font-serif text-4xl leading-tight text-brown-deep sm:text-5xl">
-                  {sluzby.meta.title}
-                </h2>
-              </div>
-              <p className="max-w-md text-muted-foreground">{sluzby.meta.intro}</p>
+            <div>
+              <span className="text-xs uppercase tracking-[0.25em] text-brown">
+                {sluzby.meta.eyebrow}
+              </span>
+              <h2 className="mt-4 font-serif text-4xl leading-tight text-brown-deep sm:text-5xl">
+                {sluzby.meta.title}
+              </h2>
+              <p className="mt-5 text-muted-foreground">{sluzby.meta.intro}</p>
             </div>
 
             <div className="mt-12 grid gap-8 lg:grid-cols-[1fr_1.4fr]">
