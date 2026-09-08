@@ -3,45 +3,19 @@
 eyebrow: Můj příběh
 title: Jmenuji se Lucie Vaňková
 
-Když se dnes ohlédnu zpátky, vidím ženu, která dlouho žila hlavně hlavou.
+Dlouho jsem žila hlavně hlavou. Musela jsem všechno zvládnout, být silná, fungovat — a přestala jsem poslouchat vlastní tělo.
 
-Měla jsem pocit, že musím všechno zvládnout. Být silná. Fungovat. Nezastavovat se. Neposlouchat své tělo, když volalo o pozornost.
+Tělo si ale nakonec řeklo o pozornost samo. Roky mě provázely silné menstruační bolesti a já nehledala jen úlevu, ale odpověď na otázku, proč moje tělo tolik trpí.
 
-Jenže tělo mluví. A když ho dlouho neposloucháme, začne křičet.
+Tehdy se do mého života dostal vědomý dech. Nečekala jsem zázrak — jen jsem se znovu učila vnímat sama sebe. S každým nádechem vyplouvalo na povrch napětí a emoce, které jsem v sobě nosila celé roky.
 
-Každý měsíc jsem prožívala silné menstruační bolesti. Byly tak intenzivní, že ovlivňovaly můj běžný život. Nehledala jsem jen způsob, jak bolest na chvíli potlačit. Hledala jsem odpověď na otázku, proč moje tělo tolik trpí.
+Postupně jsem byla klidnější, víc přítomná, přestala jsem sama se sebou bojovat. A jednoho dne jsem si uvědomila, že bolesti, které mě provázely tolik let, prostě zmizely.
 
-A tehdy se do mého života dostal vědomý dech.
+Nevnímám to jako zázrak ani univerzální řešení pro každého. Vnímám to jako dar, který přišel ve chvíli, kdy jsem přestala se svým tělem bojovat a začala mu důvěřovat.
 
-Nečekala jsem zázrak. Jen jsem se začala znovu učit vnímat sama sebe.
+Proto dnes vytvářím prostor pro tebe. Ne proto, že bych měla všechny odpovědi — ale protože znám ten pocit hledání úlevy a touhy konečně naslouchat vlastnímu tělu.
 
-S každým dalším dechem jsem si uvědomovala, kolik napětí, emocí a nevyřčených příběhů jsem v sobě nosila. Kolik let jsem své tělo brala jako něco, co musí poslouchat, místo abych mu naslouchala.
-
-Postupně se začalo měnit něco mnohem hlubšího než jen můj dech.
-
-Začala jsem být klidnější. Víc přítomná. Přestala jsem sama se sebou bojovat.
-
-A pak jsem si jednoho dne uvědomila něco, co mě dojalo.
-
-Moje menstruační bolesti, které mě provázely tolik let, postupně zmizely.
-
-Nevnímám to jako zázračné uzdravení ani univerzální řešení pro každého. Vnímám to jako dar, který přišel ve chvíli, kdy jsem začala vytvářet vztah ke svému tělu založený na důvěře místo na boji.
-
-Právě tehdy jsem pochopila, že dech není jen nástroj pro relaxaci.
-
-Je to cesta domů.
-
-Cesta zpátky k tělu, které s námi neustále komunikuje. K emocím, které si zaslouží být prožity. K vnitřní síle, která nevzniká výkonem, ale opravdovým spojením se sebou.
-
-Proto dnes vytvářím prostor pro ostatní.
-
-Ne proto, že bych měla všechny odpovědi.
-
-Ale protože znám ten pocit, kdy člověk hledá úlevu. Kdy touží znovu cítit klid. Kdy chce svému tělu konečně naslouchat místo toho, aby s ním bojoval.
-
-Pokud tě sem přivedla zvědavost, únava, bolest nebo tichá touha po změně, věřím, že každý nádech může být začátkem nové kapitoly.
-
-A bude mi ctí být součástí té tvé.
+Pokud tě sem přivedla únava, bolest nebo tichá touha po změně, věřím, že každý nádech může být začátkem nové kapitoly. A bude mi ctí být její součástí.
 
 ## ?+
 
