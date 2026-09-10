@@ -7,5 +7,3 @@ headline_end: dechu
 subheadline: Individuální sezení, skupinové dechové kruhy a workshopy v bezpečném prostoru pro tělo i mysl.
 cta_primary: Prohlédnout termíny
 cta_secondary: Co je Breathwork?
-stat_number: 200+
-stat_label: Sezení a kruhů

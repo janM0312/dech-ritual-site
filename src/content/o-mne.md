@@ -16,11 +16,3 @@ Nevnímám to jako zázrak ani univerzální řešení pro každého. Vnímám t
 Proto dnes vytvářím prostor pro tebe. Ne proto, že bych měla všechny odpovědi — ale protože znám ten pocit hledání úlevy a touhy konečně naslouchat vlastnímu tělu.
 
 Pokud tě sem přivedla únava, bolest nebo tichá touha po změně, věřím, že každý nádech může být začátkem nové kapitoly. A bude mi ctí být její součástí.
-
-## ?+
-
-label: let praxe
-
-## certifikace
-
-label: DOPLNIT

@@ -59,6 +59,7 @@ const services = sluzby.items.map((i, idx) => ({
   body: i.body,
   price: i.meta.price ?? "",
   image: serviceImages[i.meta.id ?? ""],
+  bookingHref: i.meta.booking_href ?? "#rezervace",
 }));
 
 const testimonials = reference.items.map((i) => ({
@@ -203,12 +204,6 @@ function Index() {
                 alt="Žena při meditačním dechovém cvičení"
                 className="aspect-[4/5] w-full rounded-[2rem] object-cover shadow-xl"
               />
-              <div className="absolute -bottom-6 -left-6 hidden rounded-2xl bg-card px-5 py-4 shadow-lg sm:block">
-                <p className="font-serif text-2xl text-brown-deep">{hero.meta.stat_number}</p>
-                <p className="text-xs uppercase tracking-widest text-muted-foreground">
-                  {hero.meta.stat_label}
-                </p>
-              </div>
             </div>
           </div>
         </section>
@@ -237,16 +232,6 @@ function Index() {
               </h2>
               <div className="mt-5 space-y-5 text-[15px] leading-relaxed text-muted-foreground">
                 <Prose blocks={oMne.body} />
-              </div>
-              <div className="mt-8 flex gap-8 border-t border-border pt-6">
-                {oMne.items.map((s) => (
-                  <div key={s.title}>
-                    <p className="font-serif text-3xl text-brown-deep">{s.title}</p>
-                    <p className="text-xs uppercase tracking-widest text-muted-foreground">
-                      {s.meta.label}
-                    </p>
-                  </div>
-                ))}
               </div>
             </div>
           </div>
@@ -359,7 +344,11 @@ function Index() {
                   <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-border pt-6">
                     <p className="font-serif text-2xl text-brown-deep">{active.price}</p>
                     <a
-                      href="#rezervace"
+                      href={active.bookingHref}
+                      target={active.bookingHref.startsWith("http") ? "_blank" : undefined}
+                      rel={
+                        active.bookingHref.startsWith("http") ? "noopener noreferrer" : undefined
+                      }
                       className="rounded-full bg-brown px-6 py-3 text-sm font-medium text-primary-foreground transition-colors hover:bg-brown-deep"
                     >
                       {sluzby.meta.cta}
@@ -539,7 +528,11 @@ function Index() {
               </p>
               <ul className="mt-4 space-y-2 text-sm text-foreground/80">
                 <li>
-                  <a href={kontakt.meta.instagram_href} target="_blank" className="hover:text-brown-deep">
+                  <a
+                    href={kontakt.meta.instagram_href}
+                    target="_blank"
+                    className="hover:text-brown-deep"
+                  >
                     {kontakt.meta.instagram_label}
                   </a>
                 </li>

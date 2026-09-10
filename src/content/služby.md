@@ -9,7 +9,8 @@ cta: Rezervovat termín
 
 id: individual
 tag: 1 : 1
-price: 2 000 Kč (120 minut)
+price: 1 200 Kč (90 minut)
+booking_href: https://app.zenamu.com/dechritual/appointments
 
 Dechová cesta zpět k sobě — celý prostor jen pro tebe.
 
@@ -25,7 +26,7 @@ Vhodné, když cítíš potřebu hlubšího osobního prostoru, procházíš ži
 
 id: kruhy
 tag: Skupina
-price: 490 Kč (90 minut)
+price: 470 Kč (90 minut)
 
 Společný dech, vlastní cesta.
 
@@ -39,7 +40,7 @@ Stačí přijít, položit se a nechat svůj dech, aby tě vedl.
 
 id: workshopy
 tag: Retreat
-price: od DOPLNIT Kč
+price: od 4 500 Kč
 
 Prostor pro zpomalení, odpočinek a hlubší spojení se sebou — mimo každodenní rytmus.
 
