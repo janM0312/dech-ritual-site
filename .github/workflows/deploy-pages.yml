@@ -29,8 +29,8 @@ jobs:
       - name: Build static site
         env:
           STATIC_BUILD: "true"
-          # Served from https://<user>.github.io/<repo>/ — assets need the subpath.
-          BASE_PATH: "/${{ github.event.repository.name }}/"
+          # Served from the custom domain in public/CNAME — assets live at the root.
+          BASE_PATH: "/"
         run: bun run build
 
       - name: Prepare Pages output
