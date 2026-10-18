@@ -23,6 +23,9 @@ dist-ssr
 # Raw photo originals — kept locally only, optimized copies live in src/assets/photos/
 /origofoto/
 
+# Raw logo source files from client — kept locally only, processed copy lives in src/assets/logos/
+/LogoBreathingSpace/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

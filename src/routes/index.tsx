@@ -14,6 +14,7 @@ import sluzbyRetreatyImg from "@/assets/photos/sluzby-retreaty.jpg";
 import sluzbyRetreatyImgSm from "@/assets/photos/sluzby-retreaty-sm.jpg";
 import sluzbyFiremniImg from "@/assets/photos/sluzby-firemni.jpg";
 import sluzbyFiremniImgSm from "@/assets/photos/sluzby-firemni-sm.jpg";
+import breathingSpaceLogo from "@/assets/logos/breathing-space.png";
 import {
   dotazy,
   hero,
@@ -178,19 +179,26 @@ function Index() {
                   <Prose blocks={hero.body} />
                 </div>
               )}
-              <div className="mt-10 flex flex-wrap gap-3">
-                <a
-                  href="#rezervace"
-                  className="rounded-full bg-brown px-7 py-3.5 text-sm font-medium text-primary-foreground shadow-sm transition-all hover:bg-brown-deep hover:shadow-lg"
-                >
-                  {hero.meta.cta_primary}
-                </a>
-                <a
-                  href="#breathwork"
-                  className="rounded-full border border-brown/40 px-7 py-3.5 text-sm font-medium text-brown-deep transition-colors hover:bg-rose/60"
-                >
-                  {hero.meta.cta_secondary}
-                </a>
+              <div className="mt-10 flex items-center gap-6">
+                <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                  <a
+                    href="#rezervace"
+                    className="rounded-full bg-brown px-7 py-3.5 text-sm font-medium text-primary-foreground shadow-sm transition-all hover:bg-brown-deep hover:shadow-lg"
+                  >
+                    {hero.meta.cta_primary}
+                  </a>
+                  <a
+                    href="#breathwork"
+                    className="rounded-full border border-brown/40 px-7 py-3.5 text-sm font-medium text-brown-deep transition-colors hover:bg-rose/60"
+                  >
+                    {hero.meta.cta_secondary}
+                  </a>
+                </div>
+                <img
+                  src={breathingSpaceLogo}
+                  alt="Breathing Space"
+                  className="h-auto w-24 shrink-0"
+                />
               </div>
             </div>
             <div className="relative">
